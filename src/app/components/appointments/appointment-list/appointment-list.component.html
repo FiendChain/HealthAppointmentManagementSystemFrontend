@@ -1,0 +1,28 @@
+<table datatable class="table row-border" *ngIf="appointments">
+    <thead>
+        <tr>
+            <th *ngIf="show_patients">Patient name</th>
+            <th *ngIf="show_providers">Provider name</th>
+            <th>Start time</th>
+            <th>End time</th>
+            <th>Reason</th>
+            <th>Comment</th>
+            <th *ngIf="current_user?.is_admin">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let appointment of appointments; let i = index;">
+            <td *ngIf="show_patients"><a routerLink="/patients/{{appointment.patient_id}}">{{appointment.patient_name}}</a></td>
+            <td *ngIf="show_providers"><a routerLink="/providers/{{appointment.provider_id}}">{{appointment.provider_name}}</a></td>
+            <td>{{appointment.start_time}}</td>
+            <td>{{appointment.end_time}}</td>
+            <td>{{appointment.reason}}</td>
+            <td>{{appointment.comment}}</td>
+            <td *ngIf="current_user?.is_admin">
+                <a (click)="modify(appointment, i)" data-toggle="tooltip" title="Edit"><i class="material-icons mr-1">edit</i></a>
+                <a (click)="delete(appointment, i)" data-toggle="tooltip" title="Delete"><i class="material-icons">delete_outline</i></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

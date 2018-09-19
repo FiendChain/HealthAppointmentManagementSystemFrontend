@@ -1,0 +1,36 @@
+<div *ngIf="provider$ | async as provider">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">Provider profile</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Provider number</th>
+                        <th>Provider type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{provider.name}}</td>
+                        <td>{{provider.email}}</td>
+                        <td>{{provider.phone}}</td>
+                        <td>{{provider.provider_number}}</td>
+                        <td>{{provider.provider_type}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card" >
+        <div class="card-body">
+            <h2 class="card-title">Appointments</h2>
+            <appointment-list *ngIf="provider.appointments" [show_providers]="false" [appointments]="provider.appointments"></appointment-list>
+        </div>
+    </div>
+</div>
+
+
+    

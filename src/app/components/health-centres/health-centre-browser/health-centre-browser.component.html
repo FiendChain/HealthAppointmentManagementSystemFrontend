@@ -1,0 +1,13 @@
+<div *ngIf="current_user?.type == 'admin'" class="card">
+    <div class="card-body">
+        <h2 class="card-title">Add health centre</h2>
+        <health-centre-form (onSubmit)="add_health_centre($event)"></health-centre-form>
+    </div>
+</div>
+<div class="card" *ngIf="health_centres">
+    <div class="card-body">
+        <h2 class="card-title">Health Centres</h2>
+        <health-centre-list [health-centres]="health_centres"></health-centre-list>
+    </div>
+</div>
+    

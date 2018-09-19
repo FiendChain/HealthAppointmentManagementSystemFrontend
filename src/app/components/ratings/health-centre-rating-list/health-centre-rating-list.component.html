@@ -1,0 +1,23 @@
+<table datatable class="table row-border">
+    <thead>
+        <tr>
+            <th>Patient name</th>
+            <th>Health centre name</th>
+            <th>Rating</th>
+            <th>Comment</th>
+            <th *ngIf="current_user?.is_admin">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let rating of health_centre_ratings; let i = index;">
+            <td><a routerLink="/patients/{{rating.patient_id}}">{{rating.patient_name}}</a></td>
+            <td><a routerLink="/health_centres/{{rating.health_centre_id}}">{{rating.health_centre_name}}</a></td>
+            <td>{{rating.rating}}</td>
+            <td>{{rating.comment}}</td>
+            <td *ngIf="current_user?.is_admin">
+                <a (click)="modify(rating, i)" data-toggle="tooltip" title="Edit"><i class="material-icons mr-1">edit</i></a>
+                <a (click)="delete(rating, i)" data-toggle="tooltip" title="Delete"><i class="material-icons">delete_outline</i></a>
+            </td>
+        </tr>
+    </tbody>
+</table>

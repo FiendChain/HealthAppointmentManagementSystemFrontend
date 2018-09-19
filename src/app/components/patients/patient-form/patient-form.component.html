@@ -1,0 +1,33 @@
+<form (ngSubmit)="submit()" [formGroup]="form">
+    <div class="form-label-group">
+        <input formControlName="name" type="text" class="form-control" placeholder="Name" id="inputName" required autofocus>
+        <label for="inputName">Name</label>
+    </div>
+    <div class="form-label-group">
+        <input formControlName="email" type="email" class="form-control" placeholder="Email address" id="inputEmail" required>
+        <label for="inputEmail">Email address</label>
+        <small *ngIf="form.get('email').errors?.email && form.get('email').touched">Invalid email</small>
+    </div>
+    <div class="form-label-group" *ngIf="password_field">
+        <input formControlName="password" type="password" class="form-control" placeholder="Password" id="inputPassword" required>
+        <label for="inputPassword">Password</label>
+        <small *ngIf="form.get('password').errors?.minlength && form.get('password').touched">Password must be a minimum of 8 characters</small>
+    </div>
+    <div class="form-label-group" *ngIf="password_field">
+        <input formControlName="confirm_password" type="password" class="form-control" placeholder="Confirm Password" id="inputConfirmPassword" required>
+        <label for="inputConfirmPassword">Confirm password</label>
+        <small *ngIf="form.errors?.confirm_password && form.get('confirm_password').touched">Password doesn't match</small>
+    </div>
+    <div class="form-label-group">
+        <input formControlName="phone" type="phone" class="form-control" placeholder="Phone" id="inputPhone" required>
+        <label for="inputPhone">Phone</label>
+        <small *ngIf="form.get('phone').errors?.minlength && form.get('phone').touched">Phone must be 8 digits</small>
+    </div>
+    <div class="form-label-group">
+        <input formControlName="medicare" type="type" class="form-control" placeholder="Medicare" id="inputMedicare" required>
+        <label for="inputMedicare">Medicare</label>
+        <small *ngIf="form.get('medicare').errors?.minlength && form.get('medicare').touched">Medicare must have 10 characters</small>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="form.invalid">{{button_text}}</button>
+</form>
+    

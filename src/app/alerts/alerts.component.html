@@ -1,0 +1,3 @@
+<p *ngFor="let alert of alerts; let i = index;">
+    <ngb-alert [type]="alert.type" [dismissible]="false" (click)="close(alert, i)" [ngClass]="{'alert-dismissed': alert.dismissed}">{{ alert.text }}</ngb-alert>
+</p>

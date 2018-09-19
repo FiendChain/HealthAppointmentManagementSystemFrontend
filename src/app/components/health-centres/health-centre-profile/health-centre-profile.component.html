@@ -1,0 +1,35 @@
+<div *ngIf="health_centre">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">Health centre profile</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{health_centre.name}}</td>
+                        <th>{{health_centre.address}}</th>
+                        <td>{{health_centre.rating}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="current_user?.type == 'admin'" class="card">
+        <div class="card-body">
+            <h2 class="card-title">Modify details</h2>
+            <health-centre-form [value]="health_centre" (onSubmitChange)="patch_health_centre($event)"></health-centre-form>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">Providers</h2>
+            <provider-list [providers]="health_centre.providers"></provider-list>
+        </div>
+    </div>
+</div>

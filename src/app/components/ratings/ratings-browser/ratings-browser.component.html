@@ -1,0 +1,37 @@
+<div *ngIf="current_user?.is_admin">
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">Create health centre rating</h2>
+        <health-centre-rating-form 
+            [show-patients]="true"
+            [show-health-centres]="true"
+            [button-text]="'Add rating'" 
+            (onSubmit)="add_health_centre_rating($event)"
+        ></health-centre-rating-form>
+    </div>
+</div>
+<div class="card" *ngIf="health_centre_ratings?.length">
+    <div class="card-body">
+        <h2 class="card-title">Health centre ratings</h2>
+        <health-centre-rating-list [health-centre-ratings]="health_centre_ratings"></health-centre-rating-list>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">Create provider rating</h2>
+        <provider-rating-form 
+            [show-patients]="true"
+            [show-providers]="true"
+            [button-text]="'Add rating'" 
+            (onSubmit)="add_provider_rating($event)"
+        ></provider-rating-form>
+    </div>
+</div>
+<div class="card" *ngIf="provider_ratings?.length">
+    <div class="card-body">
+        <h2 class="card-title">Provider ratings</h2>
+        <provider-rating-list [provider-ratings]="provider_ratings"></provider-rating-list>
+    </div>
+</div>
+</div>
+        

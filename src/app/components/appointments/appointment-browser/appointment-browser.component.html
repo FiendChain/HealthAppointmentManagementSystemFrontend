@@ -1,0 +1,15 @@
+<div class="card" *ngIf="current_user?.is_admin">
+    <div class="card-body">
+        <h2 class="card-title">Create appointment</h2>
+        <appointment-form [button-text]="'Add appointment'" (onSubmit)="add_appointment($event)"></appointment-form>
+    </div>
+</div>
+<div class="card" *ngIf="appointments">
+    <div class="card-body">
+        <h2 class="card-title">Appointments</h2>
+        <appointment-list [appointments]="appointments"></appointment-list>
+    </div>
+</div>
+
+    
+    

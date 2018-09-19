@@ -1,0 +1,46 @@
+<div class="row" *ngIf="current_user">
+    <div class="col-sm-12">
+        <nav class="navbar navbar-expand-lg navbar-dark" [ngClass]="navbar_background">
+            <a class="navbar-brand" routerLink="{{default_route}}">Dashboard</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><a class="nav-link" routerLink="/login" (click)="logout()">Logout ({{current_user?.name}})</a></li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" placeholder="Search">
+                    <button class="btn btn-light my-2 my-sm-0">Search</button>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!--Left nav bar-->
+    <div class="col-auto col-xs-2 d-inline">
+        <nav class="nav nav-tabs flex-column nav-stacked bg-light">
+            <ng-container *ngIf="current_user?.is_admin">
+                <a class="nav-item nav-link" routerLink="/patients" routerLinkActive="active">Patients</a>
+                <a class="nav-item nav-link" routerLink="/appointments" routerLinkActive="active">Appointments</a>
+                <a class="nav-item nav-link" routerLink="/providers" routerLinkActive="active">Providers</a>
+                <a class="nav-item nav-link" routerLink="/health_centres" routerLinkActive="active">Health Centres</a>
+                <a class="nav-item nav-link" routerLink="/ratings" routerLinkActive="active">Ratings</a>
+            </ng-container>
+            <ng-container *ngIf="current_user?.is_patient">
+                <a class="nav-item nav-link" routerLink="/appointments" routerLinkActive="active">Appointments</a>
+                <a class="nav-item nav-link" routerLink="/providers" routerLinkActive="active">Providers</a>
+                <a class="nav-item nav-link" routerLink="/health_centres" routerLinkActive="active">Health Centres</a>
+            </ng-container>
+            <ng-container *ngIf="current_user?.is_provider">
+                <a class="nav-item nav-link" routerLink="/appointments" routerLinkActive="active">Appointments</a>
+                <a class="nav-item nav-link" routerLink="/patients" routerLinkActive="active">Patients</a>
+                <a class="nav-item nav-link" routerLink="/providers" routerLinkActive="active">Providers</a>
+                <a class="nav-item nav-link" routerLink="/health_centres" routerLinkActive="active">Health Centres</a>
+            </ng-container>
+        </nav>
+    </div>
+    <!--Content-->
+    <div class="col col-xs-10">
+        <ngb-alerts></ngb-alerts>
+        <div [@fadeAnimation]="getAnimationName(browser_outlet)">
+            <router-outlet #browser_outlet="outlet"></router-outlet>
+        </div>
+    </div>
+</div>

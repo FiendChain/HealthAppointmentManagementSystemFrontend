@@ -1,0 +1,23 @@
+<form (ngSubmit)="submit()" [formGroup]="form">
+    <div class="form-group" *ngIf="show_patients">
+        <label>Patients</label>
+        <select formControlName="patient_id" class="form-control" placeholder="Patient" value="value?.patient_name?" required>
+            <option *ngFor="let patient of patients" [value]="patient.id">{{patient.name}}</option>
+        </select>
+    </div>
+    <div class="form-group" *ngIf="show_providers">
+        <label>Providers</label>
+        <select formControlName="provider_id" class="form-control" placeholder="Provider" value="value?.provider_name?" required>
+            <option *ngFor="let provider of providers" [value]="provider.id">{{provider.name}}</option>
+        </select>
+    </div>
+    <div class="form-label-group">
+        <input formControlName="rating" type="number" class="form-control" placeholder="Rating" id="inputRating">
+        <label for="inputRating">Rating</label>
+    </div>
+    <div class="form-label-group">
+        <input formControlName="comment" type="text" class="form-control" placeholder="Comment" id="inputComment">
+        <label for="inputComment">Comment</label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="form.invalid">{{button_text}}</button>
+</form>

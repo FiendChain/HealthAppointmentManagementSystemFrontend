@@ -1,0 +1,11 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class='form-label-group'>
+        <input formControlName="name" type="text" class="form-control" placeholder="Name" id="inputName" required autofocus>
+        <label for="inputName">Name</label>
+    </div>
+    <div class='form-label-group'>
+        <input formControlName="address" type="text" class="form-control" placeholder="Address" id="inputAddress" required>
+        <label for="inputAddress">Address</label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="form.invalid">Submit</button>
+</form>
