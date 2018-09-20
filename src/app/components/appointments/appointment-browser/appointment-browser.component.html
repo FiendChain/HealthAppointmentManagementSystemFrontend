@@ -1,13 +1,13 @@
-<div class="card" *ngIf="current_user?.is_admin">
-    <div class="card-body">
-        <h2 class="card-title">Create appointment</h2>
-        <appointment-form [button-text]="'Add appointment'" (onSubmit)="add_appointment($event)"></appointment-form>
-    </div>
-</div>
+<app-browser-toolbar *ngIf="current_user?.is_admin">
+    <li class="nav-item active flex">
+        <i class="material-icons mr-1">library_add</i>
+        <a class="nav-link" (click)="add_appointment()">Add appointment</a>
+    </li>
+</app-browser-toolbar>
 <div class="card" *ngIf="appointments">
     <div class="card-body">
         <h2 class="card-title">Appointments</h2>
-        <appointment-list [appointments]="appointments"></appointment-list>
+        <appointment-list [appointments]="appointments" [show-providers]="show_providers" [show-patients]="show_patients"></appointment-list>
     </div>
 </div>
 

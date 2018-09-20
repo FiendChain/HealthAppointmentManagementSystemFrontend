@@ -5,6 +5,7 @@ import { HealthCentreRating } from "../../../models/health_centre_rating.model";
 import { ProviderRating } from "../../../models/provider_rating.model";
 import { AppBrowserPanel } from "../../../app-browser/app-browser-panel.component";
 import { AuthService } from "../../../api/auth.service";
+import { ModalFormService } from "../../forms/modal-forms.service";
 
 @Component({
     selector: 'ratings-browser',
@@ -18,6 +19,7 @@ export class RatingsBrowser extends AppBrowserPanel implements OnInit {
 
     constructor(
         private api: ApiService,
+        private modal: ModalFormService,
         auth: AuthService,
     ) {
         super(auth);
@@ -42,17 +44,26 @@ export class RatingsBrowser extends AppBrowserPanel implements OnInit {
         })
     }
 
-    add_health_centre_rating(health_centre_rating: HealthCentreRating) {
-        this.api.addHealthCentreRating(health_centre_rating)
-            .subscribe((health_centre_rating) => {
-                this._health_centre_ratings.push(health_centre_rating);
-            });
+    add_health_centre_rating() {
+        this.modal
+            .open_health_centre_rating_form('Add health centre rating', {}, true, true)
+            .then((form) => {
+                this.api.addHealthCentreRating(form.onSubmit)
+                    .subscribe((health_centre_rating) => {
+                        this._health_centre_ratings.push(health_centre_rating);
+                    });
+            })
+        
     }
 
-    add_provider_rating(provider_rating: ProviderRating) {
-        this.api.addProviderRating(provider_rating)
-            .subscribe((provider_rating) => {
-                this._provider_ratings.push(provider_rating);
+    add_provider_rating() {
+        this.modal
+            .open_provider_rating_form('Add provider rating', {}, true, true)
+            .then((form) => {
+                this.api.addProviderRating(form.onSubmit)
+                    .subscribe((provider_rating) => {
+                        this._provider_ratings.push(provider_rating);
+                    });
             });
     }
 

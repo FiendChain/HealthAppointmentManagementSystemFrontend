@@ -1,36 +1,48 @@
-<div *ngIf="provider$ | async as provider">
-    <div class="card">
-        <div class="card-body">
-            <h2 class="card-title">Provider profile</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Provider number</th>
-                        <th>Provider type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{provider.name}}</td>
-                        <td>{{provider.email}}</td>
-                        <td>{{provider.phone}}</td>
-                        <td>{{provider.provider_number}}</td>
-                        <td>{{provider.provider_type}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="card" >
-        <div class="card-body">
-            <h2 class="card-title">Appointments</h2>
-            <appointment-list *ngIf="provider.appointments" [show_providers]="false" [appointments]="provider.appointments"></appointment-list>
-        </div>
+<ng-container *ngIf="provider">
+<app-browser-toolbar *ngIf="show_toolbar">
+    <li class="nav-item active flex" *ngIf="current_user?.is_patient">
+        <i class="material-icons mr-1">library_add</i>
+        <a class="nav-link" (click)="add_appointment()">Make appointment</a>
+    </li>
+    <li class="nav-item active flex" *ngIf="current_user?.is_provider && current_user?.id == id">
+        <i class="material-icons mr-1">edit</i>
+        <a class="nav-link" (click)="modify_profile()">Modify profile</a>
+    </li>
+</app-browser-toolbar>
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">Provider profile</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Provider number</th>
+                    <th>Provider type</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{provider.name}}</td>
+                    <td>{{provider.email}}</td>
+                    <td>{{provider.phone}}</td>
+                    <td>{{provider.provider_number}}</td>
+                    <td>{{provider.provider_type}}</td>
+                    <td>{{provider.rating}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+<div class="card" >
+    <div class="card-body">
+        <h2 class="card-title">Appointments</h2>
+        <appointment-list *ngIf="provider.appointments" [show-providers]="false" [show-patients]="show_patients" [appointments]="provider.appointments"></appointment-list>
+    </div>
+</div>
+</ng-container>
 
 
     

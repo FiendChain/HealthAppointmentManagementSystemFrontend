@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { FormComponent } from "../../forms/form.component";
 import { Patient } from "../../../models/patient.model";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators, AbstractControl } from "@angular/forms";
 
 @Component({
     selector: 'patient-form',
@@ -14,6 +14,14 @@ export class PatientForm extends FormComponent implements OnInit {
 
     ngOnInit(): void {
         this.create_form();
+    }
+
+    get phone(): AbstractControl {
+        return this.form.get('phone');
+    }
+
+    get medicare(): AbstractControl {
+        return this.form.get('medicare');
     }
 
     private create_form() {

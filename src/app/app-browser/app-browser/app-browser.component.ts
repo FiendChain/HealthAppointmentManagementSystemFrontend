@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, Router } from '@angular/router';
-import { fadeAnimation, slideAnimation } from '../router-animations/animations';
-import { AuthService } from '../api/auth.service';
-import { AppBrowserPanel } from './app-browser-panel.component';
+import { fadeAnimation, slideAnimation } from '../../router-animations/animations';
+import { AuthService } from '../../api/auth.service';
+import { AppBrowserPanel } from '../app-browser-panel.component';
+import { AlertService } from '../../alerts/alerts.service';
 
 @Component({
   selector: 'app-browser',
@@ -13,6 +14,7 @@ import { AppBrowserPanel } from './app-browser-panel.component';
 export class AppBrowserComponent extends AppBrowserPanel implements OnInit {
 	constructor(
 		private router: Router,
+		private alert: AlertService,
 		auth: AuthService,
 	) { 
 		super(auth);
@@ -44,6 +46,13 @@ export class AppBrowserComponent extends AppBrowserPanel implements OnInit {
 
 	getAnimationName(outlet: RouterOutlet): any {
 		return outlet.isActivated ? outlet.activatedRouteData.state : '';
+	}
+
+	show_profile(): void {
+		this.alert.addAlert({
+			type: 'success',
+			text: 'Testing',
+		});
 	}
 
 	logout(): void {

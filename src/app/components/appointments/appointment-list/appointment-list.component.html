@@ -7,7 +7,7 @@
             <th>End time</th>
             <th>Reason</th>
             <th>Comment</th>
-            <th *ngIf="current_user?.is_admin">Actions</th>
+            <th *ngIf="current_user">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -18,7 +18,7 @@
             <td>{{appointment.end_time}}</td>
             <td>{{appointment.reason}}</td>
             <td>{{appointment.comment}}</td>
-            <td *ngIf="current_user?.is_admin">
+            <td *ngIf="current_user">
                 <a (click)="modify(appointment, i)" data-toggle="tooltip" title="Edit"><i class="material-icons mr-1">edit</i></a>
                 <a (click)="delete(appointment, i)" data-toggle="tooltip" title="Delete"><i class="material-icons">delete_outline</i></a>
             </td>

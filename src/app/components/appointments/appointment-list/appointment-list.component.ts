@@ -10,7 +10,6 @@ import { ModalFormService } from "../../forms/modal-forms.service";
     templateUrl: './appointment-list.component.html',
 })
 export class AppointmentList extends AppBrowserPanel implements OnInit {
-
     constructor(
         private api: ApiService,
         private modal: ModalFormService,
@@ -19,8 +18,8 @@ export class AppointmentList extends AppBrowserPanel implements OnInit {
         super(auth);
     }
 
-    @Input('show_providers') show_providers: boolean = true;
-    @Input('show_patients') show_patients: boolean = true;
+    @Input('show-providers') show_providers: boolean = true;
+    @Input('show-patients') show_patients: boolean = true;
     @Input('appointments') appointments: Appointment[];
 
     ngOnInit(): void {
@@ -40,9 +39,31 @@ export class AppointmentList extends AppBrowserPanel implements OnInit {
             });
     } 
 
+    get delete_message(): DeleteParams {
+        switch (this.current_user.type) {
+        case 'patient':
+            return {
+                title: "Cancel appointment",
+                message: "Are you sure you want to cancel this appointment?",
+            };
+        case 'provider':
+            return {
+                title: "Cancel appointment",
+                message: "Are you sure you want to cancel this patient's appointment?",
+            }
+        case 'admin':
+        default:
+            return {
+                title: "Delete appointment",
+                message: "Are you sure you want to delete this appointment?",
+            };
+        }
+    }
+
     delete(appointment: Appointment, index: number) {
+        let delete_message = this.delete_message;
         this.modal
-            .dialog("Delete appointment", "Are you sure you want to delete this appointment?")
+            .dialog(delete_message.title, delete_message.message)
             .then(() => {
                 this.api.deleteAppointment(appointment.id)
                     .subscribe(() => {
@@ -50,4 +71,9 @@ export class AppointmentList extends AppBrowserPanel implements OnInit {
                     });
             })
     }
+}
+
+interface DeleteParams {
+    title: string;
+    message: string;
 }

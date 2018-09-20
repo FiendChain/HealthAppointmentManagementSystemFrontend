@@ -1,9 +1,9 @@
-<div *ngIf="current_user?.type == 'admin'" class="card">
-    <div class="card-body">
-        <h2 class="card-title">Add health centre</h2>
-        <health-centre-form (onSubmit)="add_health_centre($event)"></health-centre-form>
-    </div>
-</div>
+<app-browser-toolbar *ngIf="current_user?.is_admin">
+    <li class="nav-item active flex">
+        <i class="material-icons mr-1">library_add</i>
+        <a class="nav-link" (click)="add_health_centre()">Add health centre</a>
+    </li>
+</app-browser-toolbar>
 <div class="card" *ngIf="health_centres">
     <div class="card-body">
         <h2 class="card-title">Health Centres</h2>

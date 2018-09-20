@@ -46,20 +46,24 @@ export class AppointmentForm extends FormComponent implements OnInit {
             'comment': new FormControl(this.value.comment || ""),
         });
         this.providers$ = this.api.getProviders();
-        this.providers$.subscribe((providers) => {
-            this._providers = providers;
-            let provider_id = this.form.get('provider_id');
-            if (!provider_id.value) {
-                provider_id.setValue(providers[0].id);
-            }
-        });
         this.patients$ = this.api.getPatients();
-        this.patients$.subscribe((patients) => {
-            this._patients = patients;
-            let patient_id = this.form.get('patient_id');
-            if (!patient_id.value) {
-                patient_id.setValue(patients[0].id);
-            }
-        });
+        if (this.show_patients) {
+            this.patients$.subscribe((patients) => {
+                this._patients = patients;
+                let patient_id = this.form.get('patient_id');
+                if (!patient_id.value) {
+                    patient_id.setValue(patients[0].id);
+                }
+            });
+        }
+        if (this.show_providers) {
+            this.providers$.subscribe((providers) => {
+                this._providers = providers;
+                let provider_id = this.form.get('provider_id');
+                if (!provider_id.value) {
+                    provider_id.setValue(providers[0].id);
+                }
+            });
+        }
     }
 }

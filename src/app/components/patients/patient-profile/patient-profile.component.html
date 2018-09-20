@@ -1,31 +1,37 @@
-<div *ngIf="patient$ | async as patient">
-    <div class="card">
-        <div class="card-body">
-            <h2 class="card-title">Patient Profile</h2>
-            <table class="table table-hover row-border">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Medicare</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{patient.name}}</td>
-                        <td>{{patient.email}}</td>
-                        <td>{{patient.phone}}</td>
-                        <td>{{patient.medicare}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <h2 class="card-title">Appointments</h2>
-            <appointment-list *ngIf="patient.appointments" [show_patients]="false" [appointments]="patient.appointments"></appointment-list>
-        </div>
+<ng-container *ngIf="patient">
+<app-browser-toolbar *ngIf="show_toolbar">
+    <li class="nav-item active flex">
+        <i class="material-icons mr-1">edit</i>
+        <a class="nav-link" (click)="modify_patient()">Modify profile</a>
+    </li>
+</app-browser-toolbar>
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">Patient Profile</h2>
+        <table class="table table-hover row-border">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Medicare</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{patient.name}}</td>
+                    <td>{{patient.email}}</td>
+                    <td>{{patient.phone}}</td>
+                    <td>{{patient.medicare}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">Appointments</h2>
+        <appointment-list *ngIf="patient.appointments" [show-patients]="false" [appointments]="patient.appointments"></appointment-list>
+    </div>
+</div>
+</ng-container>

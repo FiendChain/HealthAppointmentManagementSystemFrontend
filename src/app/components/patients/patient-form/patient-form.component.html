@@ -21,12 +21,12 @@
     <div class="form-label-group">
         <input formControlName="phone" type="phone" class="form-control" placeholder="Phone" id="inputPhone" required>
         <label for="inputPhone">Phone</label>
-        <small *ngIf="form.get('phone').errors?.minlength && form.get('phone').touched">Phone must be 8 digits</small>
+        <small *ngIf="(phone.errors?.minlength || phone.error?.maxlength) && phone.touched">Phone must be 8 digits</small>
     </div>
     <div class="form-label-group">
         <input formControlName="medicare" type="type" class="form-control" placeholder="Medicare" id="inputMedicare" required>
         <label for="inputMedicare">Medicare</label>
-        <small *ngIf="form.get('medicare').errors?.minlength && form.get('medicare').touched">Medicare must have 10 characters</small>
+        <small *ngIf="(medicare.errors?.minlength || medicare.error?.maxlength) && form.get('medicare').touched">Medicare must have 10 characters</small>
     </div>
     <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" [disabled]="form.invalid">{{button_text}}</button>
 </form>

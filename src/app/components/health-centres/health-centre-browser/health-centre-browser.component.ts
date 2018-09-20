@@ -4,7 +4,7 @@ import { Observable } from "../../../../../node_modules/rxjs";
 import { HealthCentre } from "../../../models/health_centre.model";
 import { AuthService } from "../../../api/auth.service";
 import { AppBrowserPanel } from "../../../app-browser/app-browser-panel.component";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ModalFormService } from "../../forms/modal-forms.service";
 
 @Component({
     selector: 'health-centre-browser',
@@ -16,8 +16,8 @@ export class HealthCentreBrowser extends AppBrowserPanel implements OnInit {
 
     constructor(
         private api: ApiService,
+        private modal: ModalFormService,
         auth: AuthService,
-        private modal: NgbModal,
     ) { 
         super(auth);
     }
@@ -33,15 +33,13 @@ export class HealthCentreBrowser extends AppBrowserPanel implements OnInit {
         return this._health_centres;
     }
 
-    add_health_centre(health_centre: HealthCentre): void {
-        this.api.addHealthCentre(health_centre)
-            .subscribe((health_centre: HealthCentre) => {
-                this._health_centres.push(health_centre);
+    add_health_centre(): void {
+        this.modal.open_health_centre_form('Add health centre')
+            .then((form) => {
+                this.api.addHealthCentre(form.onSubmit)
+                    .subscribe((health_centre: HealthCentre) => {
+                        this._health_centres.push(health_centre);
+                    });
             });
-    }
-
-    test_content(content) {
-        console.log(content);
-        this.modal.open(content);
     }
 }; 

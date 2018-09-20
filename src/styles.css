@@ -3,30 +3,107 @@
     --input-padding-y: 1.5rem;
 }
 
+body {
+    min-width: 1000px;        /* Suppose you want minimum width of 1000px */
+    width: auto !important;  /* Firefox will set width as auto */
+    width: 1000px;            /* As IE6 ignores !important it will set width as 1000px; */
+}
+
+/* Content */
+app-browser {
+    width: 100%;
+    height: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+    flex-flow: column;
+    background-color: #ffffff;
+    position: relative;
+    height: 100vh;
+    float: left;
+    top: 0;
+    transition: all 0.3s;
+    margin-right: 2rem;
+    width: 180px;
+    z-index: 100;
+}
+
+/* Browser content */
+.browser-content {
+    position: relative;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+/* Toolbar */
+app-browser-toolbar li {
+    display: flex;
+    cursor: pointer;
+}
+
+app-browser-toolbar li i {
+    vertical-align: text-bottom;
+}
+
+app-browser-toolbar li a {
+    font-weight: 300;
+}
+
 /* Alerts */
 @keyframes alertAnimation {
     from {
-        transform: scale(0);
+        /* transform: scale(0); */
+        border: 0rem;
+        font-size: 0%;
+        height: 0px;
+        margin: 0rem;
         opacity: 0;
+        transform: scaleX(0);
     }
     to {
-        transform: scale(1);
+        /* transform: scale(1); */
+        border: 2rem;
+        font-size: 100%;
+        height: 50px;
+        margin-top: 1rem;
         opacity: 1;
+        transform: scaleX(1);
     }
 }
 
 @keyframes alertDismissAnimation {
     from {
-        transform: scale(1);
+        /* transform: scale(1); */
+        border: 2rem;
+        font-size: 100%;
+        height: 50px;
+        margin-top: 1rem;
         opacity: 1;
+        transform: scaleX(1);
     }
     to {
-        transform: scale(0);
+        /* transform: scale(0); */
+        border: 0rem;
+        font-size: 0%;
+        height: 0px;
+        margin: 0rem;
         opacity: 0;
+        transform: scaleX(0);
     }
 }
 
+.alert-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    margin-bottom: 0px;
+}
+
 .alert {
+    position: relative;
     animation: alertAnimation 0.5s ease;
     border-radius: 1rem;
     border: 2rem;
@@ -34,11 +111,15 @@
     cursor: pointer;
     font-weight: 300;
     margin-top: 1rem;
-    width: 98%;
+    margin-bottom: 0rem !important;
 }
 
 .alert-dismissed {
     animation: alertDismissAnimation 0.25s ease;
+}
+
+a {
+    cursor: pointer;
 }
 
 /* Tables */
@@ -50,10 +131,13 @@
         transform: scale(1.01);
     }
 }
-
 table tbody tr:hover {
     cursor: pointer;
     box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+table td, table th {
+    text-overflow: ellipsis;
 }
 
 /* Card views */
@@ -63,7 +147,6 @@ table tbody tr:hover {
     box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
     margin-top: 1rem;
     margin-bottom: 1rem;
-    width: 98%;
 }
   
 .card .card-title {
@@ -102,9 +185,9 @@ table tbody tr:hover {
     padding: 2rem;
 }
   
-form {
+/* form {
     width: 100%;
-}
+} */
 
 /* Forms */
 form .btn, .btn-round, .card-signin .btn {
@@ -131,7 +214,6 @@ form .btn, .btn-round, .card-signin .btn {
     top: 0;
     left: 0;
     display: block;
-    width: 100%;
     margin-left: .75rem;
     /* Override default `<label>` margin */
     line-height: 1.5;

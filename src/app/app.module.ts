@@ -17,7 +17,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // components
 import { AlertsComponent } from './alerts/alerts.component';
-import { AppBrowserComponent } from './app-browser/app-browser.component';
+import { AppBrowserComponent } from './app-browser/app-browser/app-browser.component';
 import { AppComponent } from './app.component';
 import { AppointmentBrowser } from './components/appointments/appointment-browser/appointment-browser.component';
 import { AppointmentForm } from './components/appointments/appointment-form/appointment-form.component';
@@ -45,12 +45,15 @@ import { RegisterFormProvider } from './components/login/register-form-provider/
 import { ModalBody } from './components/forms/modal-body.component';
 import { HealthCentreRatingForm } from './components/ratings/health-centre-rating-form/health-centre-rating-form.component';
 import { ProviderRatingForm } from './components/ratings/provider-rating-form/provider-rating-form.component';
+import { CommonModule } from '@angular/common';
+import { AppBrowserToolbar } from './app-browser/app-browser-toolbar/app-browser-toolbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     // browser
     AppBrowserComponent,
+    AppBrowserToolbar,
     // health centre
     HealthCentreBrowser,
     HealthCentreForm,
@@ -105,6 +108,7 @@ import { ProviderRatingForm } from './components/ratings/provider-rating-form/pr
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    CommonModule,
     DataTablesModule,
     FormsModule,
     HttpClientModule,

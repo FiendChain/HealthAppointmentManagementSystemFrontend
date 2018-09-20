@@ -4,6 +4,7 @@ import { ApiService } from "../../../api/api.service";
 import { Observable } from "rxjs";
 import { AuthService } from "../../../api/auth.service";
 import { AppBrowserPanel } from "../../../app-browser/app-browser-panel.component";
+import { ModalFormService } from "../../forms/modal-forms.service";
 
 @Component({
     selector: 'appointment-browser',
@@ -13,8 +14,11 @@ export class AppointmentBrowser extends AppBrowserPanel implements OnInit {
     private _appointments: Appointment[];
     private appointments$: Observable<Appointment[]>;
 
+    private appointment_form_cache: Appointment|any = {};
+
     constructor(
         private api: ApiService,
+        private modal: ModalFormService,
         auth: AuthService,
     ) { 
         super(auth);
@@ -22,6 +26,18 @@ export class AppointmentBrowser extends AppBrowserPanel implements OnInit {
 
     get appointments(): Appointment[] {
         return this._appointments;
+    }
+
+    get show_patients(): boolean {
+        return (this.current_user 
+            && (this.current_user.is_admin || this.current_user.is_provider)
+        );
+    }
+
+    get show_providers(): boolean {
+        return (this.current_user
+            && (this.current_user.is_admin || this.current_user.is_patient)  
+        );
     }
 
     ngOnInit(): void {
@@ -33,10 +49,16 @@ export class AppointmentBrowser extends AppBrowserPanel implements OnInit {
         }
     }
 
-    add_appointment(appointment: Appointment): void {
-        this.api.addAppointment(appointment)
-            .subscribe((appointment) => {
-                this._appointments.push(appointment);
+    add_appointment(): void {
+        this.modal
+            .open_appointment_form('Add appointment', this.appointment_form_cache)
+            .then((form) => {
+                this.appointment_form_cache = form.onSubmit;
+                this.api.addAppointment(form.onSubmit)
+                    .subscribe((appointment) => {
+                        this.appointment_form_cache = {};
+                        this._appointments.push(appointment);
+                    });
             });
     }
 

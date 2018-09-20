@@ -1,30 +1,18 @@
 <div *ngIf="current_user?.is_admin">
-<div class="card">
-    <div class="card-body">
-        <h2 class="card-title">Create health centre rating</h2>
-        <health-centre-rating-form 
-            [show-patients]="true"
-            [show-health-centres]="true"
-            [button-text]="'Add rating'" 
-            (onSubmit)="add_health_centre_rating($event)"
-        ></health-centre-rating-form>
-    </div>
-</div>
+<app-browser-toolbar *ngIf="current_user?.is_admin">
+    <li class="nav-item active flex">
+        <i class="material-icons mr-1">library_add</i>
+        <a class="nav-link" (click)="add_health_centre_rating()">Add health centre rating</a>
+    </li>
+    <li class="nav-item active flex">
+        <i class="material-icons mr-1">library_add</i>
+        <a class="nav-link" (click)="add_provider_rating()">Add provider rating</a>
+    </li>
+</app-browser-toolbar>
 <div class="card" *ngIf="health_centre_ratings?.length">
     <div class="card-body">
         <h2 class="card-title">Health centre ratings</h2>
         <health-centre-rating-list [health-centre-ratings]="health_centre_ratings"></health-centre-rating-list>
-    </div>
-</div>
-<div class="card">
-    <div class="card-body">
-        <h2 class="card-title">Create provider rating</h2>
-        <provider-rating-form 
-            [show-patients]="true"
-            [show-providers]="true"
-            [button-text]="'Add rating'" 
-            (onSubmit)="add_provider_rating($event)"
-        ></provider-rating-form>
     </div>
 </div>
 <div class="card" *ngIf="provider_ratings?.length">

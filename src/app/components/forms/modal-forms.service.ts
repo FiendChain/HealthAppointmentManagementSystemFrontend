@@ -17,8 +17,8 @@ import { HealthCentreRating } from "../../models/health_centre_rating.model";
 import { ProviderRating } from "../../models/provider_rating.model";
 
 interface FormResponse {
-    onSubmit: EventEmitter<any>;
-    onSubmitChange: EventEmitter<any>;
+    onSubmit: any;
+    onSubmitChange: any;
 }
 
 @Injectable()

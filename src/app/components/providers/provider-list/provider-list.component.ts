@@ -12,6 +12,8 @@ import { AppBrowserPanel } from "../../../app-browser/app-browser-panel.componen
 export class ProviderList extends AppBrowserPanel implements OnInit {
     @Input('providers') providers: Provider[];
 
+    public dtOptions: DataTables.Settings = {};
+
     constructor(
         private api: ApiService,
         private modal: ModalFormService,
@@ -21,7 +23,10 @@ export class ProviderList extends AppBrowserPanel implements OnInit {
     }
 
     ngOnInit(): void {
-        
+        this.dtOptions = {
+            autoWidth: false,
+            responsive: true,
+        };
     }
 
     modify(provider: Provider, index: number) {
