@@ -4,7 +4,7 @@
         <div class="card card-signin">
         <div class="card-body">
             <h5 class="card-title text-center">Register as provider</h5>
-            <provider-form (onSubmit)="register(event$)" [button-text]="'Submit'" [password-field]="true"></provider-form>
+            <provider-form (onSubmit)="register($event)" [button-text]="'Submit'" [password-field]="true"></provider-form>
             <hr class="my-4">
             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" routerLink="/register_patient">Register as patient</button>
             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" routerLink="/login">Login</button>
